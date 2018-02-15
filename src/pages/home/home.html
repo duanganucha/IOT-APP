@@ -1,17 +1,40 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Home</ion-title>
+  <ion-navbar color="danger">
+    <ion-title>ioT เซาะกราว</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+<ion-content padding class="card-background-page">
+
+
+  <ion-card padding>
+    <p align="center">
+      <img [src]="imagePath" style="width:50%;">
+    </p>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div>
+          <button ion-button large color="danger" (click)="onLED()" block>On</button>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <button ion-button large color="dark" (click)="offLED()" block>Off </button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngFor="let item of leds | async">
+    <ion-list-header>
+      status : {{item.payload}}
+    </ion-list-header>
+    <ion-item>topic : {{ item.topic }}</ion-item>
+    <ion-item>status : {{ item.retain }}</ion-item>
+    <ion-item>time : {{ item.lastUpdated * 1000 | date:'dd-MM-yyyy HH:mm:ss a' }}</ion-item>
+  </ion-list>
+
 </ion-content>
